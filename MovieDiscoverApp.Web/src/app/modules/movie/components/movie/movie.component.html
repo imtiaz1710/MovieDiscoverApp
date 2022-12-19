@@ -20,5 +20,5 @@
         </div> -->
       </a>
     </div>
-    <p-paginator [rows]="10" [totalRecords]="100"></p-paginator>
+    <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="totalResults"></p-paginator>
 </div>

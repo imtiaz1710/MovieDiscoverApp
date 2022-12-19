@@ -9,26 +9,35 @@ import { MovieService } from '../../services/movie.service';
 })
 export class MovieComponent implements OnInit {
   movies: MovieViewModel[] = [];
-  pageNo: number= 0;
+  pageNo: number = 1;
+  totalResults: number = 0;
+  
   moviePosterBaseUrl: string = `https://image.tmdb.org/t/p/w200`
 
   constructor(private movieService: MovieService) {
-   }
+  }
 
   ngOnInit(): void {
     this.getMovie();
   }
 
-  getMovie(){
-    this.movieService.getMovies(1).subscribe({
+  getMovie() {
+    this.movieService.getMovies(this.pageNo).subscribe({
       next: res => {
-        res.page = this.pageNo;
+        this.pageNo = res.page;
+        this.totalResults = res.total_results; 
+        debugger
         this.movies = res.results;
       }
     })
   }
 
-  generateMoviePosterFullUrl(fileName: string){
+  generateMoviePosterFullUrl(fileName: string) {
     return `${this.moviePosterBaseUrl}/${fileName}`;
+  }
+
+  onPageChange(event: any){
+    this.pageNo = event.page + 1;
+    this.getMovie();
   }
 }
