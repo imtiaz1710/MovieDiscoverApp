@@ -24,7 +24,6 @@ export class MovieComponent implements OnInit {
       next: res => {
         res.page = this.pageNo;
         this.movies = res.results;
-        debugger
       }
     })
   }

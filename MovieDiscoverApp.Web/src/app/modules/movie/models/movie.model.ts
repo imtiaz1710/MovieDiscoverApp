@@ -73,4 +73,3 @@ export interface MovieDetailsViewModel {
     name: string
   }
   
-//   https://api.themoviedb.org/3/movie/%20436270?api_key=e97e8346683b49bfb765b16bf5c95c29&language=en-US

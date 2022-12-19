@@ -1,3 +1,6 @@
 export class RouterConstants {
-    static Movies = "movies"
+    static basePath = 'localhost:4200'
+    static movies = "movies"
 }
+
+
