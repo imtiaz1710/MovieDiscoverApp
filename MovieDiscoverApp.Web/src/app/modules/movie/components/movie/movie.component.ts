@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { MovieViewModel } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
 
@@ -11,8 +12,6 @@ export class MovieComponent implements OnInit {
   movies: MovieViewModel[] = [];
   pageNo: number = 1;
   totalResults: number = 0;
-  
-  moviePosterBaseUrl: string = `https://image.tmdb.org/t/p/w200`
 
   constructor(private movieService: MovieService) {
   }
@@ -26,14 +25,13 @@ export class MovieComponent implements OnInit {
       next: res => {
         this.pageNo = res.page;
         this.totalResults = res.total_results; 
-        debugger
         this.movies = res.results;
       }
     })
   }
 
   generateMoviePosterFullUrl(fileName: string) {
-    return `${this.moviePosterBaseUrl}/${fileName}`;
+    return `${RouterConstants.posterBaseUrl}/${fileName}`;
   }
 
   onPageChange(event: any){
