@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { MovieViewModel } from '../../models/movie.model';
@@ -10,18 +11,20 @@ import { MovieService } from '../../services/movie.service';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit, OnDestroy {
-  val: number = 0;
+  // dateValue: Date | undefined;
   subscriptions: Subscription[] = [];
   movies: MovieViewModel[] = [];
   pageNo: number = 1;
   totalResults: number = 0;
   value: boolean = true;
+  movieFilterFormGroup: FormGroup;
 
-  constructor(private movieService: MovieService) {
+  constructor(private movieService: MovieService, private formBuilder: FormBuilder) {
   }
   
   ngOnInit(): void {
     this.getMovie();
+    this.buildForm();
   }
 
   ngOnDestroy(): void {
@@ -47,5 +50,17 @@ export class MovieComponent implements OnInit, OnDestroy {
   onPageChange(event: any){
     this.pageNo = event.page + 1;
     this.getMovie();
+  }
+
+  onFilterButtonClick(){
+      let primaryReleaseDate: Date = this.movieFilterFormGroup.value.year.getFullYear();
+  }
+
+  buildForm() {
+    this.movieFilterFormGroup = this.formBuilder.group(
+      {
+        primaryReleaseDate: new FormControl<Date | null>(null)
+      }
+    );
   }
 }

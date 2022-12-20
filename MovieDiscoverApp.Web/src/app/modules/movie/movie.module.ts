@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import {PaginatorModule} from 'primeng/paginator';
 import {CheckboxModule} from 'primeng/checkbox';
-
+import {CalendarModule} from 'primeng/calendar';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import {CheckboxModule} from 'primeng/checkbox';
     CommonModule,
     PaginatorModule,
     MovieRoutingModule,
-    CheckboxModule
+    CheckboxModule,
+    CalendarModule,
+    ReactiveFormsModule
   ]
 })
 export class MovieModule { }
