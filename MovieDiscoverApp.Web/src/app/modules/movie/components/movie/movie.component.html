@@ -4,10 +4,10 @@
       <div class="text-center mt-3" role="button"><h5>Filter</h5></div>
       <form [formGroup]="movieFilterFormGroup">
         <div class="my-3">
-          <label class="ms-3" for="yearCalender">Primary Release Date:</label>
-          <p-calendar id="yearCalender" class="p-3" formControlName="primaryReleaseDate" view="year" dateFormat="yy"></p-calendar>
+          <label class="ms-3" for="yearCalender">Primary Release Year:</label>
+          <p-calendar (onSelect)="onSelectPrimaryReleaseYear($event)" id="yearCalender" class="p-3" view="year" dateFormat="yy"></p-calendar>
         </div>
-        <!-- <p-checkbox class="p-3" label="lsfsdf" [(ngModel)]="value" [binary]="true"></p-checkbox> -->
+        <p-checkbox class="p-3" label="Include Adults" formControlName="includeAdult" [binary]="true"></p-checkbox>
       </form>
       <div class="text-center p-3">
         <button class="btn btn-dark" (click)="onFilterButtonClick()">Search</button>
