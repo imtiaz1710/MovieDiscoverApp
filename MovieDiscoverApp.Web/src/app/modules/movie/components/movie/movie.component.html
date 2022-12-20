@@ -1,24 +1,19 @@
-
-<div class="row">
-
-
-    <div *ngFor="let movie of movies" class="card m-2" style="width: 15rem; border: 0;">
-      <a role="button">
-        <img class="card-img-top p-2" [src]="generateMoviePosterFullUrl(movie.poster_path)" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{movie.original_title}}</h5>
-          <!-- <p class="card-text">{{movie.overview}}</p> -->
-        </div>
-        <ul class="list-group list-group-flush">
-          <!-- <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li> -->
-        </ul>
-        <!-- <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div> -->
-      </a>
+<div class="container-fluid ">
+  <div class="row">
+    <div class="card mx-5 mt-3 col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+      <p-inputNumber class="p-3" [max]="32" [(ngModel)]="val"></p-inputNumber>
+      <p-checkbox class="p-3" label="lsfsdf" [(ngModel)]="value" [binary]="true"></p-checkbox>
     </div>
-    <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="10000"></p-paginator>
+    <div class="col row">
+      <div *ngFor="let movie of movies" class="m-3" style="width: 12rem;">
+        <div class="column">
+          <img  [src]="generateMoviePosterFullUrl(movie.poster_path)" alt="Card image cap">
+          <div>
+            <h5>{{movie.original_title}}</h5>
+          </div>
+        </div>
+      </div>
+      <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="10000"></p-paginator>
+    </div>
+  </div>
 </div>

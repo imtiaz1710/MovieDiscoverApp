@@ -5,6 +5,7 @@ import { MovieRoutingModule } from './movie-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import {PaginatorModule} from 'primeng/paginator';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 
@@ -16,6 +17,7 @@ import {PaginatorModule} from 'primeng/paginator';
     CommonModule,
     PaginatorModule,
     MovieRoutingModule,
+    CheckboxModule
   ]
 })
 export class MovieModule { }
