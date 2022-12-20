@@ -8,6 +8,7 @@
           <p-calendar (onSelect)="onSelectPrimaryReleaseYear($event)" id="yearCalender" class="p-3" view="year" dateFormat="yy"></p-calendar>
         </div>
         <p-checkbox class="p-3" label="Include Adults" formControlName="includeAdult" [binary]="true"></p-checkbox>
+        <p-checkbox class="p-3" label="Include Video" formControlName="includeVideo" [binary]="true"></p-checkbox>
       </form>
       <div class="text-center p-3">
         <button class="btn btn-dark" (click)="onFilterButtonClick()">Search</button>

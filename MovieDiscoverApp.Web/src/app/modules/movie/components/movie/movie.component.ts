@@ -63,7 +63,8 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.movieFilterFormGroup = this.formBuilder.group(
       {
         primaryReleaseYear: new FormControl<number>(0),
-        includeAdult: new FormControl<Boolean>(false)
+        includeAdult: new FormControl<Boolean>(false),
+        includeVideo: new FormControl<Boolean>(false) 
       }
     );
   }

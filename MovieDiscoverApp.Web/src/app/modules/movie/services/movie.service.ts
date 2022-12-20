@@ -12,8 +12,8 @@ export class MovieService {
 
   getMovies(pageNo: number, movieUrlExtensionString: string): Observable<MovieResponseModel>{
     let url = `https://api.themoviedb.org/3/discover/movie?api_key=e97e8346683b49bfb765b16bf5c95c29&language=en-US&
-      sort_by=popularity.desc&include_video=false&page=${pageNo}&with_watch_monetization_types=flatrate${movieUrlExtensionString}`;
-      
+      sort_by=popularity.desc&page=${pageNo}&with_watch_monetization_types=flatrate${movieUrlExtensionString}`;
+
     return this.http.get<MovieResponseModel>(url.trim());
   }
 
