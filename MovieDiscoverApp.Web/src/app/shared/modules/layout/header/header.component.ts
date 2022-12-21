@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   goToMovies() {
     this.isNavActive = !this.isNavActive;
-    this.router.navigate([`/${RouterConstants.movies}`]);
+    this.router.navigate([``]);
   }
 
   goToPeoples() {
