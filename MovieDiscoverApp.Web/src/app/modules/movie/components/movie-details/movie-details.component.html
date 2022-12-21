@@ -1,33 +1,36 @@
 <body>
-    <div style="background-image: url('https://image.tmdb.org/t/p/w200/53BC9F2tpZnsGno2cLhzvGprDYS.jpg');"
-        class="card m-3 backgroundPoster">
-        <div style="color: white;">sdfsdfaaaaaaaaaaaaaaaaaaaaa</div>
+    <div style="height:fit-content;" class="card m-3 backgroundPoster">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-3">
+                <img [src]="getMovieImageUrl()" class="p-3" style="width: 20rem;" alt="Card image cap">
+            </div>
+            <div class="col-6 p-3 text-white">
+                <h2 class="mt-2">{{movie.title}}</h2> 
+                <p>{{movie.tagline}}</p>
+                <div class="m-4"></div>
+                <h6>Overview:</h6>
+                <p>{{movie.overview}}</p>
+                <h6>Genres:</h6>
+                <p>{{getGenres()}}</p> 
+                <h6 class="mt-3">Production Countries</h6>
+                <p>{{getProductionCountries()}}</p>
+                <h6 class="mt-3">Spoken Languages</h6>
+                <p>{{getSpokenLanguages()}}</p>
+            </div>
+        </div>
     </div>
 
     <div class="container text-center">
-        <h3>What We Do</h3><br>
-        <div class="row">
-            <div class="col-sm-4">
-                <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                <p>Current Project</p>
-            </div>
-            <div class="col-sm-4">
-                <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-                <p>Project 2</p>
-            </div>
-            <div class="col-sm-4">
-                <div class="well">
-                    <p>Some text..</p>
-                </div>
-                <div class="well">
-                    <p>Some text..</p>
-                </div>
-            </div>
-        </div>
+        
     </div><br>
 
-    <footer class="container-fluid text-center">
-        <p>Footer Text</p>
+    <footer style="" class="container-fluid">
+        <h4>Production Companies:</h4><br>
+        <div class="row">
+            <div *ngFor="let pcompany of movie.production_companies" class="col-sm-4">
+                <img [src]="getProductionCompanyLogoUrl(pcompany.logo_path)"  style="width: 16rem;" alt="Card image cap">
+            </div>
+        </div>
     </footer>
-
 </body>

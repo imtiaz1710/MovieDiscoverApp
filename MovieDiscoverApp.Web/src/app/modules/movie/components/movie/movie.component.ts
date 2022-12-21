@@ -58,8 +58,8 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.subscriptions.push(subscriptionOfGetMovies);
   }
 
-  generateMoviePosterFullUrl(fileName: string) {
-    return `${RouterConstants.posterBaseUrl}/${fileName}`;
+  getMoviePosterUrl(fileName: string) {
+    return RouterConstants.generateFullImageUrl(fileName);
   }
 
   onPageChange(event: any) {
