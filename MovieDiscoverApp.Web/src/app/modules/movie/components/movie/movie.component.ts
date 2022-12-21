@@ -13,7 +13,6 @@ import { MovieService } from '../../services/movie.service';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit, OnDestroy {
-  // dateValue: Date | undefined;
   subscriptions: Subscription[] = [];
   movies: MovieViewModel[] = [];
   pageNo: number = 1;
@@ -76,15 +75,8 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.router.navigate([RouterConstants.getMovieDetailsPath(movieId)]);
   }
 
-  buildForm() {
-    this.movieFilterFormGroup = this.formBuilder.group(
-      {
-        primaryReleaseYear: new FormControl<number>(0),
-        includeAdult: new FormControl<Boolean>(false),
-        includeVideo: new FormControl<Boolean>(false),
-        withGenres: new FormControl<string>('')
-      }
-    );
+  onSelectPrimaryReleaseYear(event: Date){
+    this.movieFilterFormGroup.patchValue({primaryReleaseYear: event.getFullYear()}) 
   }
 
   buildQueryString() {
@@ -99,7 +91,14 @@ export class MovieComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSelectPrimaryReleaseYear(event: Date){
-    this.movieFilterFormGroup.patchValue({primaryReleaseYear: event.getFullYear()}) 
+  buildForm() {
+    this.movieFilterFormGroup = this.formBuilder.group(
+      {
+        primaryReleaseYear: new FormControl<number>(0),
+        includeAdult: new FormControl<Boolean>(false),
+        includeVideo: new FormControl<Boolean>(false),
+        withGenres: new FormControl<string>('')
+      }
+    );
   }
 }

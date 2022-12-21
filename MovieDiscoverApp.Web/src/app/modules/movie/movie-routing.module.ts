@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MovieComponent } from './components/movie/movie.component';
 
-
-
 const routes: Routes = [
   {
     path: "",
