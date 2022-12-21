@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { MovieDetailsViewModel, MovieResponseModel } from '../models/movie.model';
+import { map, Observable } from 'rxjs';
+import { Genre, MovieDetailsViewModel, MovieResponseModel } from '../models/movie.model';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 
 @Injectable({
@@ -17,7 +17,12 @@ export class MovieService {
     return this.http.get<MovieResponseModel>(url.trim());
   }
 
-  getMovieDetailsById(movieId: number): Observable<MovieDetailsViewModel>{
-    return this.http.get<MovieDetailsViewModel>(`https://api.themoviedb.org/3/movie/%${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`)
+  getMovieDetailsById(movieId: number): Observable<MovieDetailsViewModel[]>{
+    return this.http.get<MovieDetailsViewModel[]>(`https://api.themoviedb.org/3/movie/%${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`)
+  }
+
+  getGenres(): Observable<Genre[]>{
+    return this.http.get<any>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${RouterConstants.apiKey}&language=en-US`)
+      .pipe(map(res => res.genres));
   }
 }

@@ -9,6 +9,10 @@
         </div>
         <p-checkbox class="p-3" label="Include Adults" formControlName="includeAdult" [binary]="true"></p-checkbox>
         <p-checkbox class="p-3" label="Include Video" formControlName="includeVideo" [binary]="true"></p-checkbox>
+        <div class="my-3">
+          <label class="ms-3" for="yearCalender">Genres:</label>
+          <p-multiSelect class="p-3 custom-ms" formControlName="withGenres" [options]="genres" optionLabel="name" optionValue="id"></p-multiSelect>
+        </div>
       </form>
       <div class="text-center p-3">
         <button class="btn btn-dark" (click)="onFilterButtonClick()">Search</button>
@@ -24,7 +28,7 @@
           </div>
         </div>
       </div>
-      <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="10000"></p-paginator>
+      <p-paginator (onPageChange)="onPageChange($event)" [rows]="20" [totalRecords]="totalResults"></p-paginator>
     </div>
   </div>
 </div>
