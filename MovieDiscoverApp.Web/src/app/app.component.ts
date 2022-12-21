@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AppComponent {
   constructor() {
-    console.log('dsflsadf;sf;asdf')
   }
 
   title = 'MovieDiscoverApp.Web';
