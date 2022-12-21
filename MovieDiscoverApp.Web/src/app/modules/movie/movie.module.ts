@@ -7,11 +7,13 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {CalendarModule} from 'primeng/calendar';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 
 @NgModule({
   declarations: [
-    MovieComponent
+    MovieComponent,
+    MovieDetailsComponent
   ],
   imports: [
     CommonModule,

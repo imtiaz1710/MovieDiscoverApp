@@ -71,6 +71,10 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.getMovie();
   }
 
+  onMovieClick(movieId: number){
+    debugger
+  }
+
   buildForm() {
     this.movieFilterFormGroup = this.formBuilder.group(
       {
@@ -97,8 +101,4 @@ export class MovieComponent implements OnInit, OnDestroy {
   onSelectPrimaryReleaseYear(event: Date){
     this.movieFilterFormGroup.patchValue({primaryReleaseYear: event.getFullYear()}) 
   }
-
-//   onGenreChange(event){
-// debugger
-//   }
 }
