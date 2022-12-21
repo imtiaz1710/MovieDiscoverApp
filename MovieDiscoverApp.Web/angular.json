@@ -71,7 +71,8 @@
               "browserTarget": "MovieDiscoverApp.Web:build:production"
             },
             "development": {
-              "browserTarget": "MovieDiscoverApp.Web:build:development"
+              "browserTarget": "MovieDiscoverApp.Web:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
