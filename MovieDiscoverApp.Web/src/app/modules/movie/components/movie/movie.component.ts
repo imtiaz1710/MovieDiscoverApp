@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { FilterConstants } from 'src/app/shared/constants/filter-constant';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
@@ -22,7 +23,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   movieUrlQueryString: string = "";
   genres: Genre[] = [];
 
-  constructor(private movieService: MovieService, private formBuilder: FormBuilder) {
+  constructor(private movieService: MovieService, private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -72,7 +73,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   onMovieClick(movieId: number){
-    debugger
+    this.router.navigate([RouterConstants.getMovieDetailsPath(movieId)]);
   }
 
   buildForm() {

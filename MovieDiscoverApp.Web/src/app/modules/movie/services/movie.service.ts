@@ -17,8 +17,8 @@ export class MovieService {
     return this.http.get<MovieResponseModel>(url.trim());
   }
 
-  getMovieDetailsById(movieId: number): Observable<MovieDetailsViewModel[]>{
-    return this.http.get<MovieDetailsViewModel[]>(`https://api.themoviedb.org/3/movie/%${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`)
+  getMovieDetailsById(movieId: string): Observable<MovieDetailsViewModel[]>{
+    return this.http.get<MovieDetailsViewModel[]>(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`)
   }
 
   getGenres(): Observable<Genre[]>{
