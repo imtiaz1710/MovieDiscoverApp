@@ -28,4 +28,9 @@ export class MovieService extends BaseService {
     return this.http.get<any>(`${this.baseUrl}/3/genre/movie/list?api_key=${RouterConstants.apiKey}&language=en-US`)
       .pipe(map(res => res.genres));
   }
+
+  searchMovie(pageNo:number, searchText: string): Observable<MovieDetailsViewModel>{
+    return this.http.get<MovieDetailsViewModel>
+      (`${this.baseUrl}/3/search/movie?api_key=${RouterConstants.apiKey}&language=en-US&query=${searchText}&page=${pageNo}&include_adult=false`);
+  }
 }
