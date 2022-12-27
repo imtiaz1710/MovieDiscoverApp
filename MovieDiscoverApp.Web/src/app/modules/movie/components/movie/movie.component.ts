@@ -16,6 +16,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   movies: MovieViewModel[] = [];
   pageNo: number = 1;
+  currentSearchSuggestionPage: number = 1;
   totalResults: number = 0;
   value: boolean = true;
   movieFilterFormGroup: FormGroup;
@@ -37,7 +38,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  getGenre(){
+  getGenre() {
     const subscriptionOfGetGenre = this.movieService.getGenres().subscribe({
       next: data => {
         this.genres = data;
@@ -73,33 +74,38 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.getMovie();
   }
 
-  onMovieClick(movieId: number){
+  onMovieClick(movieId: number) {
     this.router.navigate([RouterConstants.getMovieDetailsPath(movieId)]);
   }
 
-  onSelectPrimaryReleaseYear(event: Date){
-    this.movieFilterFormGroup.patchValue({primaryReleaseYear: event.getFullYear()}) 
+  onSelectPrimaryReleaseYear(event: Date) {
+    this.movieFilterFormGroup.patchValue({ primaryReleaseYear: event.getFullYear() })
   }
 
   buildQueryString() {
     this.movieUrlQueryString = '';
     let queryString = '';
-    
+
     Object.keys(this.movieFilterFormGroup.controls).forEach(key => {
-      if(this.movieFilterFormGroup.controls[key].value){
+      if (this.movieFilterFormGroup.controls[key].value) {
         queryString = FilterConstants.getQueryString(FilterConstants[key], this.movieFilterFormGroup.value[key].toString());
         this.movieUrlQueryString = this.movieUrlQueryString.concat(queryString);
       }
     });
   }
 
-  search(event) {
-    this.movieService.searchMovie(1, event.query).subscribe(data => {
-        this.results = data;
+  onSearch() {
+    this.currentSearchSuggestionPage = 1;
+    this.loadSearchSuggestion();
+  }
+
+  loadSearchSuggestion() {
+    this.movieService.searchMovie(this.currentSearchSuggestionPage, this.searchValue).subscribe(data => {
+      this.results = data;
     });
   }
-  
-  onSelectSearchSuggestion(event: MovieViewModel){
+
+  onSelectSearchSuggestion(event: MovieViewModel) {
     this.onMovieClick(event.id);
   }
 

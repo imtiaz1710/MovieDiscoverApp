@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import { filter } from 'rxjs';
-import { CommonHelper } from '../../../helper/common-helper';
+import { CommonHelper } from '../../helper/common-helper';
 
 @Component({
   selector: 'app-breadcrumb',

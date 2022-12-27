@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {ScrollerModule} from 'primeng/scroller';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     CalendarModule,
     ReactiveFormsModule,
     MultiSelectModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    ScrollerModule
   ]
 })
 export class MovieModule { }
