@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { MovieDetailsViewModel } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
-
+// TODO: order all the ng life cycle hooks in the execution order
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
@@ -18,15 +18,17 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   constructor(private movieService: MovieService, private activatedRoute: ActivatedRoute) {
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
 
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('movieId');
     this.getMovieDetails();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  // TODO: handle error
   getMovieDetails(){
     let subscriptionOfGetMovieDetails = this.movieService.getMovieDetailsById(this.movieId).subscribe({
       next: res => {
@@ -37,6 +39,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(subscriptionOfGetMovieDetails);
   }
 
+  // TODO: check if this.movie is defined
   getMovieImageUrl(){
     return RouterConstants.generateFullImageUrl(this.movie?.poster_path);
   }
@@ -49,10 +52,12 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     return RouterConstants.generateFullImageUrl(fileName?.slice(1));
   }
 
+  // TODO: Can you use .join() ? Try
   getProductionCountries(){
     return this.movie?.production_countries.map(c => c.name).toString();
   }
 
+  // TODO: Can you use .join() ? Try
   getSpokenLanguages(){
     return this.movie?.spoken_languages.map(c => c.name).toString();
   }

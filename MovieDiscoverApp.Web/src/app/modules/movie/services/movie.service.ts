@@ -9,11 +9,12 @@ import { BaseService } from 'src/app/shared/services/base-service';
   providedIn: 'root'
 })
 export class MovieService extends BaseService {
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     super();
   }
-
+  // TODO: if we use hard coded api then we do not need proxy-conf.json
   getMovies(pageNo: number, movieUrlExtensionString: string): Observable<MovieResponseModel>{
+    // TODO: make it const
     let url = `${this.baseUrl}/3/discover/movie?api_key=${RouterConstants.apiKey}&language=en-US&
       sort_by=popularity.desc&page=${pageNo}&with_watch_monetization_types=flatrate${movieUrlExtensionString}`;
 
@@ -24,6 +25,7 @@ export class MovieService extends BaseService {
     return this.http.get<MovieDetailsViewModel>(`${this.baseUrl}/3/movie/${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`);
   }
 
+  // TODO: API_KEY can be added in http_interceptor
   getGenres(): Observable<Genre[]>{
     return this.http.get<any>(`${this.baseUrl}/3/genre/movie/list?api_key=${RouterConstants.apiKey}&language=en-US`)
       .pipe(map(res => res.genres));
