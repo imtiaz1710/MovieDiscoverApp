@@ -7,11 +7,16 @@ const routes: Routes = [
   {
     path: "",
     component: MovieComponent,
-    data: {breadcrumbs: 'Movies'}
+    data: {
+      breadcrumb: null
+    }
   },
   {
     path: ":movieId",
     component: MovieDetailsComponent,
+    data: {
+      breadcrumb: 'Movie Details'
+    }
   },
 ];
 
