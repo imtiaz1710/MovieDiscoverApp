@@ -38,22 +38,22 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getMovieImageUrl(){
-    return RouterConstants.generateFullImageUrl(this.movie.poster_path);
+    return RouterConstants.generateFullImageUrl(this.movie?.poster_path);
   }
 
   getGenres(){
-    return this.movie.genres.map(g => g.name).toString();
+    return this.movie?.genres.map(g => g.name).toString();
   }
 
   getProductionCompanyLogoUrl(fileName){
-    return RouterConstants.generateFullImageUrl(fileName.slice(1));
+    return RouterConstants.generateFullImageUrl(fileName?.slice(1));
   }
 
   getProductionCountries(){
-    return this.movie.production_countries.map(c => c.name).toString();
+    return this.movie?.production_countries.map(c => c.name).toString();
   }
 
   getSpokenLanguages(){
-    return this.movie.spoken_languages.map(c => c.name).toString();
+    return this.movie?.spoken_languages.map(c => c.name).toString();
   }
 }

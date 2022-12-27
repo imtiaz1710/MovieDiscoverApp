@@ -6,11 +6,11 @@
                 <img [src]="getMovieImageUrl()" class="p-3" style="width: 20rem;">
             </div>
             <div class="col-6 p-3 text-white">
-                <h2 class="mt-2">{{movie.title}} ({{movie.release_date}})</h2> 
-                <i>{{movie.tagline}}</i>
+                <h2 class="mt-2">{{movie?.title}} ({{movie?.release_date}})</h2> 
+                <i>{{movie?.tagline}}</i>
                 <div class="m-4"></div>
                 <h6>Overview:</h6>
-                <p>{{movie.overview}}</p>
+                <p>{{movie?.overview}}</p>
                 <h6>Genres:</h6>
                 <p>{{getGenres()}}</p> 
                 <h6 class="mt-3">Production Countries</h6>
@@ -18,9 +18,9 @@
                 <h6 class="mt-3">Spoken Languages</h6>
                 <p>{{getSpokenLanguages()}}</p>
                 <h6>Average Vote: </h6> 
-                <p>{{movie.vote_average}}</p>
+                <p>{{movie?.vote_average}}</p>
                 <h6>Vote Count: </h6>
-                <p>{{movie.vote_count}}</p>
+                <p>{{movie?.vote_count}}</p>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
     <footer class="container-fluid">
         <h4>Production Companies:</h4><br>
         <div class="row mb-6">
-            <div *ngFor="let pcompany of movie.production_companies" class="col-auto me-3">
+            <div *ngFor="let pcompany of movie?.production_companies" class="col-auto me-3">
                 <img [src]="getProductionCompanyLogoUrl(pcompany.logo_path)"  style="width: 50%;">
             </div>
         </div>
