@@ -1,6 +1,18 @@
-.backgroundPoster {
+.background-poster {
     background-repeat: no-repeat;
     background-size: cover;
     height: 60vh;
     background-color: rgb(28, 28, 28, 1);
+}
+
+.movie-info__card--height{
+    height:fit-content;
+}
+
+.movie-info__card__image--width{
+    width: 20rem;
+}
+
+.movie__footer-image--width{
+    width: 50%;
 }

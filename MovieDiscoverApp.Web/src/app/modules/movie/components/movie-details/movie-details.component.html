@@ -1,9 +1,9 @@
 <body>
-    <div style="height:fit-content;" class="card m-3 backgroundPoster">
+    <div class="movie-info__card--height card m-3 background-poster">
         <div class="row">
             <div class="col-1"></div>
-            <div class="col-3">
-                <img [src]="getMovieImageUrl()" class="p-3" style="width: 20rem;">
+            <div class="col-3 p-5">
+                <img [src]="getMovieImageUrl()" class="p-3 movie-info__card__image--width">
             </div>
             <div class="col-6 p-3 text-white">
                 <h2 class="mt-2">{{movie?.title}} ({{movie?.release_date}})</h2> 
@@ -26,14 +26,13 @@
     </div>
 
     <div class="container text-center">
-        
     </div><br>
 
     <footer class="container-fluid">
         <h4>Production Companies:</h4><br>
         <div class="row mb-6">
             <div *ngFor="let pcompany of movie?.production_companies" class="col-auto me-3">
-                <img [src]="getProductionCompanyLogoUrl(pcompany.logo_path)"  style="width: 50%;">
+                <img [src]="getProductionCompanyLogoUrl(pcompany.logo_path)" class="movie__footer-image--width" >
             </div>
         </div>
     </footer>

@@ -8,7 +8,7 @@
       </p-autoComplete>
     </div>
     <!-- TODO: please do not use inline styles -->
-    <div style="height:fit-content;" class="card mx-5 mt-3 col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+    <div class="movie__filter--fit-content card mx-5 mt-3 col-auto col-md-3 col-xl-2 px-sm-2 px-0">
       <div class="text-center mt-3" role="button">
         <h5>Filter</h5>
       </div>
@@ -33,7 +33,7 @@
     <div class="col row">
       <!-- TODO: You can extract below functionalities to seperate components. Cleaner and precise and **SEPERATION of CONCERN(s)  -->
       <!-- TODO: you can use async pipe -->
-      <div *ngFor="let movie of movies" class="m-3" style="width: 12rem;">
+      <div *ngFor="let movie of movies" class="m-3 movie__card--width">
         <div (click)="onMovieClick(movie.id)" role="button">
           <!-- TODO: DONT bind methods. It will infinitely  -->
           <img [src]="getMoviePosterUrl(movie.poster_path)" alt="Card image cap">

@@ -1,7 +1,14 @@
-:host ::ng-deep .custom-ms
-            .p-multiselect-label {
-            width: 200px !important;
-            word-wrap: break-word;   
-            white-space: pre-wrap;  
-            display: block;
-        }
+:host ::ng-deep .custom-ms .p-multiselect-label {
+    width: 200px !important;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    display: block;
+}
+
+.movie__filter--fit-content {
+    height: fit-content;
+}
+
+.movie__card--width {
+    width: 12rem;
+}
