@@ -21,6 +21,8 @@ export class MovieComponent implements OnInit, OnDestroy {
   movieFilterFormGroup: FormGroup;
   movieUrlQueryString: string = "";
   genres: Genre[] = [];
+  searchValue: string;
+  results: MovieViewModel[];
 
   constructor(private movieService: MovieService, private formBuilder: FormBuilder, private router: Router) {
   }
@@ -89,6 +91,16 @@ export class MovieComponent implements OnInit, OnDestroy {
         this.movieUrlQueryString = this.movieUrlQueryString.concat(queryString);
       }
     });
+  }
+
+  search(event) {
+    this.movieService.searchMovie(1, event.query).subscribe(data => {
+        this.results = data;
+    });
+  }
+  
+  onSelectSearchSuggestion(event: MovieViewModel){
+    this.onMovieClick(event.id);
   }
 
   buildForm() {

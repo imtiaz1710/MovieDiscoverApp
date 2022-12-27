@@ -8,11 +8,14 @@ import {CalendarModule} from 'primeng/calendar';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { MovieSearchingComponent } from './components/movie-searching/movie-searching.component';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
     MovieComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MovieSearchingComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     CheckboxModule,
     CalendarModule,
     ReactiveFormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    AutoCompleteModule
   ]
 })
 export class MovieModule { }

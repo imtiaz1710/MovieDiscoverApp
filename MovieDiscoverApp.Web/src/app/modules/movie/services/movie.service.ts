@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Genre, MovieDetailsViewModel, MovieResponseModel } from '../models/movie.model';
+import { Genre, MovieDetailsViewModel, MovieResponseModel, MovieViewModel } from '../models/movie.model';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { BaseService } from 'src/app/shared/services/base-service';
 
@@ -21,7 +21,7 @@ export class MovieService extends BaseService {
   }
 
   getMovieDetailsById(movieId: string): Observable<MovieDetailsViewModel>{
-    return this.http.get<MovieDetailsViewModel>(`${this.baseUrl}/3/movie/${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`)
+    return this.http.get<MovieDetailsViewModel>(`${this.baseUrl}/3/movie/${movieId}?api_key=${RouterConstants.apiKey}&language=en-US`);
   }
 
   getGenres(): Observable<Genre[]>{
@@ -29,8 +29,9 @@ export class MovieService extends BaseService {
       .pipe(map(res => res.genres));
   }
 
-  searchMovie(pageNo:number, searchText: string): Observable<MovieDetailsViewModel>{
-    return this.http.get<MovieDetailsViewModel>
-      (`${this.baseUrl}/3/search/movie?api_key=${RouterConstants.apiKey}&language=en-US&query=${searchText}&page=${pageNo}&include_adult=false`);
+  searchMovie(pageNo:number, searchText: string): Observable<MovieViewModel[]>{
+    return this.http.get<MovieResponseModel>
+      (`${this.baseUrl}/3/search/movie?api_key=${RouterConstants.apiKey}&language=en-US&query=${searchText}&page=${pageNo}&include_adult=false`)
+        .pipe(map(res => res.results));
   }
 }
