@@ -5,11 +5,12 @@ import { MovieComponent } from 'src/app/modules/movie/components/movie/movie.com
 
 const routes: Routes = [
   {
-    path: "",loadChildren: () => import('../../../modules/movie/movie.module').then(x => x.MovieModule)
+    path: "", loadChildren: () => import('../../../modules/movie/movie.module').then(x => x.MovieModule),
+    data: { breadcrumb: null }
   },
   {
     path: "movies",
-    loadChildren: () => import('../../../modules/movie/movie.module').then(x => x.MovieModule)
+    loadChildren: () => import('../../../modules/movie/movie.module').then(x => x.MovieModule), data: { breadcrumb: null }
   }
 ];
 

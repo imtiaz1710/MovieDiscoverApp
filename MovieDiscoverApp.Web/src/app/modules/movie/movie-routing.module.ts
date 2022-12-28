@@ -14,9 +14,7 @@ const routes: Routes = [
   {
     path: ":movieId",
     component: MovieDetailsComponent,
-    data: {
-      breadcrumb: 'Movie Details'
-    }
+    data: { breadcrumb: 'Movie Details' }
   },
 ];
 
