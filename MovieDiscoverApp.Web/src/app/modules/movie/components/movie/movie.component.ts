@@ -95,7 +95,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   private buildQueryString(): string {
-    const url = '';
+    let url = '';
 
     const keys = Object.keys(this.movieFilterFormGroup.controls).filter(key => {
       return this.movieFilterFormGroup.controls[key].value;
@@ -103,9 +103,9 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     keys.forEach(k => {
       const queryString = FilterConstants.getQueryString(FilterConstants[k], this.movieFilterFormGroup.value[k].toString());
-      url.concat(queryString);
+      url = url.concat(queryString);
     })
-
+    
     return url;
   }
 }
