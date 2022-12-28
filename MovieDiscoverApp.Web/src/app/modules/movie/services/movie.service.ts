@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Genre, MovieDetailsViewModel, MovieResponseModel, MovieViewModel } from '../models/movie.model';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 
@@ -14,11 +14,12 @@ export class MovieService {
   public getMovies(pageNo: number, movieUrlExtensionString: string): Observable<MovieResponseModel>{
     const url = `/api/3/discover/movie?language=en-US&sort_by=popularity.desc&page=${pageNo}&with_watch_monetization_types=flatrate${movieUrlExtensionString}`;
 
-    return this.http.get<MovieResponseModel>(url.trim());
+    return this.http.get<MovieResponseModel>(url.trim()).pipe(catchError(err => of(err)));
   }
 
   public getMovieDetailsById(movieId: string): Observable<MovieDetailsViewModel>{
-    return this.http.get<MovieDetailsViewModel>(`/api/3/movie/${movieId}?&language=en-US`);
+    return this.http.get<MovieDetailsViewModel>(`/api/3/movie/${movieId}?&language=en-US`)
+      .pipe(catchError(err => of(err)));
   }
 
   public getGenres(): Observable<Genre[]>{
