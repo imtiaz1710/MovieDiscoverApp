@@ -20,10 +20,10 @@ export class MovieComponent implements OnInit, OnDestroy {
   movies: MovieViewModel[] = [];
   pageNo: number = 1;
   currentSearchSuggestionPage: number = 1;
-  totalResults: number = 0;
+  totalResults: number;
   value: boolean = true;
   movieFilterFormGroup: FormGroup;
-  movieUrlQueryString: string = "";
+  movieUrlQueryString: string;
   genres: Genre[] = [];
   searchValue: string;
   results: MovieViewModel[];

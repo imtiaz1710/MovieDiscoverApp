@@ -21,10 +21,8 @@ export class MovieService {
     return this.http.get<MovieDetailsViewModel>(`/api/3/movie/${movieId}?&language=en-US`);
   }
 
-  // TODO: API_KEY can be added in http_interceptor
   getGenres(): Observable<Genre[]>{
-    return this.http.get<any>(`/api/3/genre/movie/list?language=en-US`)
-      .pipe(map(res => res.genres));
+    return this.http.get<any>(`/api/3/genre/movie/list?language=en-US`).pipe(map(res => res.genres));
   }
 
   searchMovie(pageNo:number, searchText: string): Observable<MovieViewModel[]>{
