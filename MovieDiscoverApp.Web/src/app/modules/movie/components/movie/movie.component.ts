@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { catchError, Observable, of, Subscription, throwError } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FilterConstants } from 'src/app/shared/constants/filter-constant';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { Genre, MovieViewModel } from '../../models/movie.model';

@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { MovieDetailsViewModel } from '../../models/movie.model';
 import { MovieService } from '../../services/movie.service';
