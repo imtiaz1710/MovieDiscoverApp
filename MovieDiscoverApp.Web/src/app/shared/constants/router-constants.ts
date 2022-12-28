@@ -1,14 +1,14 @@
 export class RouterConstants {
-    static readonly appBasePath = 'localhost:4200';
-    static readonly movies = "movies";
-    static readonly apiKey = 'e97e8346683b49bfb765b16bf5c95c29';
-    static readonly posterBaseUrl = `https://image.tmdb.org/t/p/w200`
+    public static readonly appBasePath = 'localhost:4200';
+    public static readonly movies = "movies";
+    public static readonly apiKey = 'e97e8346683b49bfb765b16bf5c95c29';
+    public static readonly posterBaseUrl = `https://image.tmdb.org/t/p/w200`
 
-    static getMovieDetailsPath(movieId: number){
+    public static getMovieDetailsPath(movieId: number){
         return `${this.movies}/${movieId}`;
     }
 
-    static generateFullImageUrl(fileName: string){
+    public static generateFullImageUrl(fileName: string){
         return `${RouterConstants.posterBaseUrl}/${fileName}`;
     }
 }

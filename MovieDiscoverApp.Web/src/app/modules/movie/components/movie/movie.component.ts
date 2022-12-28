@@ -14,37 +14,66 @@ import { MovieService } from '../../services/movie.service';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit, OnDestroy {
-  // TODO: Please use access modifiers. Make private or public or even protected based on the accessibility
-  // TODO: Remeber to order the fields and methods to public protected private. in that order. Ref: Clean Code by Robert Cecil Martin
-  // TODO: do not need to initialize all the variables initially, by default they will be assigned to corresponding type's falsy values.
-  subscriptions: Subscription[] = [];
-  movies: MovieViewModel[] = [];
-  pageNo: number = 1;
-  currentSearchSuggestionPage: number = 1;
-  totalResults: number;
-  value: boolean = true;
-  movieFilterFormGroup: FormGroup;
-  movieUrlQueryString: string;
-  genres$: Observable<Genre[]>;
-  searchValue: string;
-  results: MovieViewModel[];
+  public currentSearchSuggestionPage: number = 1;
+  public totalResults: number;
+  public value: boolean = true;
+  public movieFilterFormGroup: FormGroup;
+  public movieUrlQueryString: string;
+  public genres$: Observable<Genre[]>;
+  public searchValue: string;
+  public results: MovieViewModel[];
+  public movies: MovieViewModel[] = [];
+  private subscriptions: Subscription[] = [];
+  private pageNo: number = 1;
 
-  constructor(private movieService: MovieService, private formBuilder: FormBuilder, 
+  public constructor(private movieService: MovieService, private formBuilder: FormBuilder, 
     private router: Router) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.genres$ = this.movieService.getGenres();
     this.getMovie();
     this.buildForm();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  public getMoviePosterUrl(fileName: string) {
+    return RouterConstants.generateFullImageUrl(fileName);
+  }
 
-  getMovie() {
+  public onPageChange(event: any) {
+    this.pageNo = event.page + 1;
+    this.getMovie();
+  }
+
+  public onFilterButtonClick() {
+    this.movieUrlQueryString = this.buildQueryString();
+    this.getMovie();
+  }
+  
+  public onSelectPrimaryReleaseYear(event: Date) {
+    this.movieFilterFormGroup.patchValue({ primaryReleaseYear: event.getFullYear() })
+  }
+
+  public onSearch() {
+    this.currentSearchSuggestionPage = 1;
+    this.loadSearchSuggestion();
+  }
+
+  public onSelectSearchSuggestion(event: MovieViewModel) {
+    this.router.navigate([RouterConstants.getMovieDetailsPath(event.id)]);
+  }
+
+  private loadSearchSuggestion() {
+    this.movieService.searchMovie(this.currentSearchSuggestionPage, this.searchValue).subscribe(data => {
+      this.results = data;
+    });
+  }
+
+  private getMovie() {
     const subscriptionOfGetMovies = this.movieService.getMovies(this.pageNo, this.movieUrlQueryString).subscribe({
       next: res => {
         this.pageNo = res.page;
@@ -59,28 +88,18 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.subscriptions.push(subscriptionOfGetMovies);
   }
 
-  getMoviePosterUrl(fileName: string) {
-    return RouterConstants.generateFullImageUrl(fileName);
+
+  private buildForm() {
+    this.movieFilterFormGroup = this.formBuilder.group(
+      {
+        primaryReleaseYear: new FormControl<number>(0),
+        includeAdult: new FormControl<Boolean>(false),
+        includeVideo: new FormControl<Boolean>(false),
+        withGenres: new FormControl<string>('')
+      }
+    );
   }
 
-  onPageChange(event: any) {
-    this.pageNo = event.page + 1;
-    this.getMovie();
-  }
-
-  onFilterButtonClick() {
-    this.movieUrlQueryString = this.buildQueryString();
-    this.getMovie();
-  }
-
-  onMovieClick(movieId: number) {
-    this.router.navigate([RouterConstants.getMovieDetailsPath(movieId)]);
-  }
-
-  onSelectPrimaryReleaseYear(event: Date) {
-    this.movieFilterFormGroup.patchValue({ primaryReleaseYear: event.getFullYear() })
-  }
-  
   private buildQueryString(): string {
     const url = '';
 
@@ -94,31 +113,5 @@ export class MovieComponent implements OnInit, OnDestroy {
     })
 
     return url;
-  }
-
-  onSearch() {
-    this.currentSearchSuggestionPage = 1;
-    this.loadSearchSuggestion();
-  }
-
-  loadSearchSuggestion() {
-    this.movieService.searchMovie(this.currentSearchSuggestionPage, this.searchValue).subscribe(data => {
-      this.results = data;
-    });
-  }
-
-  onSelectSearchSuggestion(event: MovieViewModel) {
-    this.onMovieClick(event.id);
-  }
-
-  buildForm() {
-    this.movieFilterFormGroup = this.formBuilder.group(
-      {
-        primaryReleaseYear: new FormControl<number>(0),
-        includeAdult: new FormControl<Boolean>(false),
-        includeVideo: new FormControl<Boolean>(false),
-        withGenres: new FormControl<string>('')
-      }
-    );
   }
 }

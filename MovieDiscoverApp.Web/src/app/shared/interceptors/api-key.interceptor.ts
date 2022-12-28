@@ -11,9 +11,9 @@ import { RouterConstants } from '../constants/router-constants';
 @Injectable()
 export class ApiKeyInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  public constructor() { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     request = request.clone({
       setParams: {
         'api_key': RouterConstants.apiKey.trim(),

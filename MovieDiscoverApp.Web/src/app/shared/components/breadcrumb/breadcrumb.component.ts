@@ -10,14 +10,14 @@ import { CommonHelper } from '../../helper/common-helper';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
-  static readonly ROUTE_DATA_BREADCRUMB = 'breadcrumb';
-  readonly home = {icon: 'pi pi-home', url: 'home'};
-  menuItems: MenuItem[];
+  public static readonly ROUTE_DATA_BREADCRUMB = 'breadcrumb';
+  public readonly home = {icon: 'pi pi-home', url: 'home'};
+  public menuItems: MenuItem[];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  public constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
   
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => this.menuItems = this.createBreadcrumbs(this.activatedRoute.root));
