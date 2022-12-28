@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { catchError, Observable, of, Subscription, throwError } from 'rxjs';
 import { FilterConstants } from 'src/app/shared/constants/filter-constant';
 import { RouterConstants } from 'src/app/shared/constants/router-constants';
 import { Genre, MovieViewModel } from '../../models/movie.model';
@@ -24,15 +25,16 @@ export class MovieComponent implements OnInit, OnDestroy {
   value: boolean = true;
   movieFilterFormGroup: FormGroup;
   movieUrlQueryString: string;
-  genres: Genre[] = [];
+  genres$: Observable<Genre[]>;
   searchValue: string;
   results: MovieViewModel[];
 
-  constructor(private movieService: MovieService, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private movieService: MovieService, private formBuilder: FormBuilder, 
+    private router: Router) {
   }
 
   ngOnInit(): void {
-    this.getGenre();
+    this.genres$ = this.movieService.getGenres();
     this.getMovie();
     this.buildForm();
   }
@@ -41,24 +43,16 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  getGenre() {
-    const subscriptionOfGetGenre = this.movieService.getGenres().subscribe({
-      next: data => {
-        this.genres = data;
-      }
-    })
-
-    this.subscriptions.push(subscriptionOfGetGenre);
-  }
 
   getMovie() {
-    // TODO: error handling should be considered.
     const subscriptionOfGetMovies = this.movieService.getMovies(this.pageNo, this.movieUrlQueryString).subscribe({
-      // TODO: You can do it using destructuring, NO NEED here though. But if you know then it would be better
       next: res => {
         this.pageNo = res.page;
         this.totalResults = res.total_pages > 500 ? 10000 : res.total_results;
         this.movies = res.results;
+      },
+      error: err => {
+        console.log(err);
       }
     });
 
@@ -75,7 +69,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   onFilterButtonClick() {
-    this.buildQueryString();
+    this.movieUrlQueryString = this.buildQueryString();
     this.getMovie();
   }
 
@@ -86,23 +80,20 @@ export class MovieComponent implements OnInit, OnDestroy {
   onSelectPrimaryReleaseYear(event: Date) {
     this.movieFilterFormGroup.patchValue({ primaryReleaseYear: event.getFullYear() })
   }
+  
+  private buildQueryString(): string {
+    const url = '';
 
-  // TODO: try to make pure methods/functions. You are changing global state that is movieUrlQueryString. Pure methods/functions will lead you to less buggy code.
-  // Although you assigned empty string to make it more safe. What if you can just return the query string from here. It will be pure and no need to play safe.
-
-  // TODO: isn't it a private method?
-  buildQueryString() {
-    this.movieUrlQueryString = '';
-    // TODO: avoid using let, you see you can declare and assign in the below scope. In that case you can directly use const
-    let queryString = '';
-
-    Object.keys(this.movieFilterFormGroup.controls).forEach(key => {
-      // TODO: Can this be filtered out using es6 .filter(...)
-      if(this.movieFilterFormGroup.controls[key].value){
-        const queryString = FilterConstants.getQueryString(FilterConstants[key], this.movieFilterFormGroup.value[key].toString());
-        this.movieUrlQueryString = this.movieUrlQueryString.concat(queryString);
-      }
+    const keys = Object.keys(this.movieFilterFormGroup.controls).filter(key => {
+      return this.movieFilterFormGroup.controls[key].value;
     });
+
+    keys.forEach(k => {
+      const queryString = FilterConstants.getQueryString(FilterConstants[k], this.movieFilterFormGroup.value[k].toString());
+      url.concat(queryString);
+    })
+
+    return url;
   }
 
   onSearch() {

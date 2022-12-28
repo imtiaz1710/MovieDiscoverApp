@@ -17,7 +17,7 @@ import { ApiKeyInterceptor } from './shared/interceptors/api-key.interceptor';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

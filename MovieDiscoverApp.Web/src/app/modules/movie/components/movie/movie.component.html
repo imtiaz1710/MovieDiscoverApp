@@ -21,7 +21,7 @@
         <p-checkbox class="p-3" label="Include Video" formControlName="includeVideo" [binary]="true"></p-checkbox>
         <div class="my-3">
           <label class="ms-3" for="yearCalender">Genres:</label>
-          <p-multiSelect class="p-3 custom-ms" formControlName="withGenres" [options]="genres" optionLabel="name"
+          <p-multiSelect class="p-3 custom-ms" formControlName="withGenres" [options]="(genres$ | async)" optionLabel="name"
             optionValue="id"></p-multiSelect>
         </div>
       </form>
