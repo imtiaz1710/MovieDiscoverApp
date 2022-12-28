@@ -3,7 +3,7 @@
     <div class="mx-5 mt-3">
       <label for="search" class="me-3"><b>Search:</b></label>
       <p-autoComplete [size]="24" id="search" [(ngModel)]="searchValue" 
-        [suggestions]="results" [field]="'original_title'"  
+        [suggestions]="(searchSuggestions$ | async)" [field]="'original_title'"  
         (onSelect)="onSelectSearchSuggestion($event)" (completeMethod)="onSearch()">
       </p-autoComplete>
     </div>

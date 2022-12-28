@@ -21,7 +21,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   public movieUrlQueryString: string;
   public genres$: Observable<Genre[]>;
   public searchValue: string;
-  public results: MovieViewModel[];
+  public searchSuggestions$: Observable<MovieViewModel[]>;
   public movies: MovieViewModel[] = [];
   private subscriptions: Subscription[] = [];
   private pageNo: number = 1;
@@ -53,24 +53,18 @@ export class MovieComponent implements OnInit, OnDestroy {
     this.movieUrlQueryString = this.buildQueryString();
     this.getMovie();
   }
-  
+
   public onSelectPrimaryReleaseYear(event: Date) {
     this.movieFilterFormGroup.patchValue({ primaryReleaseYear: event.getFullYear() })
   }
 
   public onSearch() {
     this.currentSearchSuggestionPage = 1;
-    this.loadSearchSuggestion();
+    this.searchSuggestions$ = this.movieService.searchMovie(this.currentSearchSuggestionPage, this.searchValue);
   }
 
   public onSelectSearchSuggestion(event: MovieViewModel) {
     this.router.navigate([RouterConstants.getMovieDetailsPath(event.id)]);
-  }
-
-  private loadSearchSuggestion() {
-    this.movieService.searchMovie(this.currentSearchSuggestionPage, this.searchValue).subscribe(data => {
-      this.results = data;
-    });
   }
 
   private getMovie() {
